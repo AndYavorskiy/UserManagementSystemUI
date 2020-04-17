@@ -1,1 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html * {
+    outline: 0;
+    box-sizing: border-box;
+}
+
+.flex-spacer {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+}
+
+
+.button-group {
+    button:not(:first-child) {
+      margin-left: 5px;
+    }
+  
+    button:not(:last-child) {
+      margin-right: 5px;
+    }
+  }
+  

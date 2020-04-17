@@ -1,0 +1,65 @@
+<div class="form-container" *ngIf="!isLoading">
+    <div class="button-group">
+        <button mat-raised-button color="primary" (click)="submit()">Save</button>
+
+        <button mat-raised-button (click)="goBack()">Cancel</button>
+    </div>
+
+    <form [formGroup]="form" class="edit-form">
+        <div class="form-column">
+            <h1>Personal</h1>
+
+            <mat-form-field appearance="outline">
+                <mat-label>First Name</mat-label>
+                <input formControlName="firstName" matInput type="text">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input formControlName="lastName" matInput type="text">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Birthday</mat-label>
+                <input matInput [matDatepicker]="birthday" [max]="maxDate" formControlName="birthday">
+                <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
+                <mat-datepicker #birthday></mat-datepicker>
+            </mat-form-field>
+
+            <h1>Contact</h1>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Phone number</mat-label>
+                <input formControlName="phone" matInput type="tel">
+            </mat-form-field>
+        </div>
+
+        <div class="form-column">
+            <h1>Account</h1>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Role</mat-label>
+                <mat-select formControlName="role">
+                    <mat-option *ngFor="let role of roles" [value]="role">
+                        {{ RoleType[role] }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input formControlName="email" matInput type="email">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="!data" appearance="outline">
+                <mat-label>Password</mat-label>
+                <input formControlName="password" matInput type="password">
+            </mat-form-field>
+
+            <mat-form-field *ngIf="!data" appearance="outline">
+                <mat-label>Confirm password</mat-label>
+                <input formControlName="confirmPassword" matInput type="password">
+            </mat-form-field>
+        </div>
+    </form>
+</div>
