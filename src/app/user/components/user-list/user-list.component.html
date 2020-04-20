@@ -6,7 +6,7 @@
     <mat-form-field class="search-field" appearance="outline">
         <mat-icon matPrefix>search</mat-icon>
         <mat-label>Search</mat-label>
-        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Tony Stark">
+        <input matInput (keyup)="applyFilter($event)" [(ngModel)]="filterText" placeholder="Ex. Tony Stark">
     </mat-form-field>
 </div>
 

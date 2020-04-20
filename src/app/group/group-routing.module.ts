@@ -5,9 +5,9 @@ import { GroupListComponent, GroupDetailsComponent, GroupCreateEditComponent } f
 
 const routes: Routes = [
   { path: '', component: GroupListComponent },
-  { path: ':id', component: GroupDetailsComponent },
   { path: 'create', component: GroupCreateEditComponent },
   { path: 'edit/:id', component: GroupCreateEditComponent },
+  { path: ':id', component: GroupDetailsComponent },
 ];
 
 @NgModule({

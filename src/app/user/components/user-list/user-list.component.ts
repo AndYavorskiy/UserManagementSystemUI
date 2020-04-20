@@ -2,9 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 import { UserDetailsModel } from '../../models';
 import { UserService } from '../../services';
-import { RoleType, FilterModel } from 'src/app/shared/models';
+import { RoleType, FilterModel, ModelProperties } from 'src/app/shared/models';
 import { PageEvent } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-user-list',
@@ -13,6 +15,7 @@ import { MatTableDataSource } from '@angular/material/table';
 })
 export class UserListComponent implements OnInit {
 
+  filters = ModelProperties.propertiesOf<FilterModel>();
   isLoading = false;
   isLoadingError = false;
   RoleType = RoleType;
@@ -27,15 +30,24 @@ export class UserListComponent implements OnInit {
   filterText = "";
   includeInactive = true;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.searchData();
+    this.activatedRoute.queryParams.
+      pipe(take(1))
+      .subscribe(param => {
+        this.filterText = param[this.filters('filterText')] || this.filterText;
+        this.pageIndex = param[this.filters('pageIndex')] || this.pageIndex;
+        this.pageSize = param[this.filters('pageSize')] || this.pageSize;
+        this.includeInactive = param[this.filters('includeInactive')] || this.includeInactive;
+
+        this.searchData();
+      });
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.filterText = filterValue.trim().toUpperCase();
     this.pageIndex = 0;
 
     this.searchData();
@@ -56,12 +68,12 @@ export class UserListComponent implements OnInit {
       filterText: this.filterText
     } as FilterModel;
 
-    // this.router.navigate(
-    //   [],
-    //   {
-    //     relativeTo: this.activatedRoute,
-    //     queryParams: fiter
-    //   });
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.activatedRoute,
+        queryParams: fiter
+      });
 
     this.isLoading = true;
 

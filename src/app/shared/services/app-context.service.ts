@@ -14,9 +14,7 @@ export class AppContextService {
     public currentUserInfo: Observable<UserModel>;
 
     constructor() {
-        const user = !!localStorage.getItem(AppSettingKeys.UserInfo)
-            ? JSON.parse(localStorage.getItem(AppSettingKeys.UserInfo))
-            : null;
+        const user = this.getUserInfo();
 
         this.userModelSubject = new BehaviorSubject<UserModel>(user);
         this.currentUserInfo = this.userModelSubject.asObservable();
@@ -26,5 +24,11 @@ export class AppContextService {
         localStorage.setItem(AppSettingKeys.UserInfo, JSON.stringify(userModel));
 
         this.userModelSubject.next(userModel);
+    }
+
+    public getUserInfo(): UserModel {
+        return !!localStorage.getItem(AppSettingKeys.UserInfo)
+            ? JSON.parse(localStorage.getItem(AppSettingKeys.UserInfo))
+            : null;
     }
 }

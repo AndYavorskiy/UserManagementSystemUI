@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
 import { HttpParamsBuilder } from 'src/app/shared/utilities';
-import { FilterModel, DataPagedModel } from 'src/app/shared/models';
+import { FilterModel, DataPagedModel, ChangePasswordModel } from 'src/app/shared/models';
 import { UserDetailsModel, UserCreateModel } from '../models';
 
 @Injectable({
@@ -37,7 +37,11 @@ export class UserService {
     return this.http.put<UserDetailsModel>(this.baseUrl, model);
   }
 
-  delete(id: number) {
+  delete(id: string) {
     return this.http.delete<void>(`${this.baseUrl}/${id}`);
+  }
+
+  changePassword(model: ChangePasswordModel) {
+    return this.http.put<void>(`${this.baseUrl}/change-password`, model);
   }
 }

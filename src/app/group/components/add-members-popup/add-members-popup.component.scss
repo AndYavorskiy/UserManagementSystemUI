@@ -1,0 +1,20 @@
+.search-field {
+    font-size: 14px;
+    width: 100%;
+}
+
+.search-candidate {
+    img {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .no-data-found {
+        color: #428dff;
+        font-size: 1.4em;
+        margin: 20px 0;
+        text-align: center;
+    }
+}

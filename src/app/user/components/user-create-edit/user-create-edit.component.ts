@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { RoleType } from 'src/app/shared/models';
+import { RoleType, GenderType } from 'src/app/shared/models';
 import { UserCreateModel, UserDetailsModel } from '../../models';
 import { UserService } from '../../services';
 
@@ -20,11 +20,18 @@ export class UserCreateEditComponent implements OnInit {
 
   form: FormGroup;
   RoleType = RoleType;
+  GenderType = GenderType;
 
   roles = [
     RoleType.Admin,
     RoleType.Moderator,
     RoleType.User
+  ];
+
+  genders = [
+    GenderType.Male,
+    GenderType.Femail,
+    GenderType.Other
   ];
 
   constructor(private userService: UserService,
@@ -42,6 +49,7 @@ export class UserCreateEditComponent implements OnInit {
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
       role: ['', Validators.required],
+      gender: ['', Validators.required],
       phone: [''],
       birthday: [null]
     });
@@ -63,6 +71,7 @@ export class UserCreateEditComponent implements OnInit {
               role: data.role,
               phone: data.phone,
               birthday: data.birthday,
+              gender: data.gender,
               password: null,
               confirmPassword: null
             });
@@ -77,41 +86,37 @@ export class UserCreateEditComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.valid) {
-      const formData = this.form.getRawValue();
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      this.form.markAsDirty();
 
-      const model = this.data ? Object.assign({}, this.data) : new UserCreateModel();
+      return;
+    }
 
-      model.firstName = formData.firstName;
-      model.lastName = formData.lastName;
-      model.email = formData.email;
-      model.role = formData.role;
-      model.phone = formData.phone;
-      model.birthday = formData.birthday;
+    const formData = this.form.getRawValue();
 
-      if (model instanceof UserCreateModel) {
-        model.password = formData.password;
+    const model = this.data ? Object.assign({}, this.data) : new UserCreateModel();
 
-        this.userService.create(model)
-          .subscribe(result => {
+    model.firstName = formData.firstName;
+    model.lastName = formData.lastName;
+    model.email = formData.email;
+    model.role = formData.role;
+    model.phone = formData.phone;
+    model.birthday = formData.birthday;
+    model.gender = formData.gender;
 
-            console.log(result);
+    if (model instanceof UserCreateModel) {
+      model.password = formData.password;
 
-            this.goToDetails(result.id);
-
-          });
-      } else {
-        this.userService.update(model)
-          .subscribe(result => this.goToDetails(result.id));
-      }
+      this.userService.create(model)
+        .subscribe(result => this.router.navigate(["/users", result.id], { replaceUrl: true }));
+    } else {
+      this.userService.update(model)
+        .subscribe(() => this.goBack());
     }
   }
 
   goBack() {
     this.location.back();
-  }
-
-  private goToDetails(id: string) {
-    this.router.navigate(["/users", id], { replaceUrl: true });
   }
 }

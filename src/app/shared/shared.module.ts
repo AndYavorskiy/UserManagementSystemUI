@@ -17,6 +17,8 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatListModule } from '@angular/material/list';
 
 @NgModule({
   declarations: [],
@@ -41,7 +43,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
     MatButtonToggleModule,
     MatChipsModule,
     MatSelectModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatDialogModule,
+    MatListModule
   ]
 })
 export class SharedModule { }

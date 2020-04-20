@@ -5,3 +5,7 @@ export { UserModel } from "./user.model";
 export { RefreshTokenModel } from "./refresh-token.model";
 export { AuthTokenModel } from "./auth-token.model";
 export { AuthModel } from "./auth.model";
+export { GenderType } from "./gender-type.enum";
+export { ModelProperties } from "./model-properties";
+export { PagedDataRequestModel } from "./paged-data-request.model";
+export { ChangePasswordModel } from "./change-password.model";

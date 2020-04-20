@@ -20,6 +20,15 @@
             </mat-form-field>
 
             <mat-form-field appearance="outline">
+                <mat-label>Genders</mat-label>
+                <mat-select formControlName="gender">
+                    <mat-option *ngFor="let gender of genders" [value]="gender">
+                        {{ GenderType[gender] }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
                 <mat-label>Birthday</mat-label>
                 <input matInput [matDatepicker]="birthday" [max]="maxDate" formControlName="birthday">
                 <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>

@@ -1,1 +1,21 @@
-<p>group-create-edit works!</p>
+<div class="form-container" *ngIf="!isLoading">
+    <div class="button-group">
+        <button mat-raised-button color="primary" (click)="submit()">Save</button>
+
+        <button mat-raised-button (click)="goBack()">Cancel</button>
+    </div>
+
+    <form [formGroup]="form" class="edit-form">
+        <div class="form-column">
+            <mat-form-field appearance="outline">
+                <mat-label>Name</mat-label>
+                <input formControlName="name" matInput type="text">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" *ngIf="!isCreteMode">
+                <mat-label>Active status</mat-label>
+                <input formControlName="isActive" matInput type="text">
+            </mat-form-field>
+        </div>
+    </form>
+</div>

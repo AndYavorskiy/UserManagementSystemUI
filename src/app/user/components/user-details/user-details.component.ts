@@ -4,7 +4,7 @@ import { Location } from '@angular/common';
 
 import { UserService } from '../../services';
 import { UserDetailsModel } from '../../models';
-import { RoleType } from 'src/app/shared/models';
+import { RoleType, GenderType } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-user-details',
@@ -17,6 +17,7 @@ export class UserDetailsComponent implements OnInit {
   isLoading = true;
 
   RoleType = RoleType;
+  GenderType = GenderType;
 
   constructor(private userService: UserService,
     private router: Router,
@@ -41,6 +42,7 @@ export class UserDetailsComponent implements OnInit {
   }
 
   delete() {
-
+    this.userService.delete(this.data.id)
+      .subscribe(() => { this.location.back() })
   }
 }

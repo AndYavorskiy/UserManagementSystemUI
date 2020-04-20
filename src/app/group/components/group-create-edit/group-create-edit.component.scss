@@ -1,0 +1,20 @@
+.form-container {
+    margin: 0 auto;
+}
+
+.edit-form {
+    display: flex;
+    margin: 0 auto;
+    max-width: 900px;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+
+    .form-column {
+        max-width: 400px;
+
+        .mat-form-field {
+            width: 100%;
+        }
+    }
+}

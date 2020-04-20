@@ -12,43 +12,50 @@
 
     <div>
         <div class="details-container">
-            <div class="details">
-                <h1>Personal</h1>
+            <div class="logo-wrapper">
+                <img src="../../../../assets/images/avatar-boy.png" alt="">
 
-                <div>
-                    <span>First Name: </span>
-                    <span>{{data.firstName}}</span>
-                </div>
+                <div class="button-group">
 
-                <div>
-                    <span>First Name: </span>
-                    <span>{{data.lastName}}</span>
-                </div>
-
-                <div>
-                    <span>Birthday: </span>
-                    <span>{{data.birthday}}</span>
-                </div>
-
-                <h1>Contact</h1>
-
-                <div>
-                    <span>Phone number: </span>
-                    <span>{{data.phone}}</span>
+                    <button mat-button color="primary">CHANGE</button>
                 </div>
             </div>
 
-            <div class="details">
-                <h1>Account</h1>
-
-                <div>
-                    <span>Role: </span>
-                    <span>{{RoleType[data.role]}}</span>
+            <div class="details-wrapper">
+                <div class="title">
+                    <span>{{data.firstName + " "+ data.lastName }}</span>
                 </div>
 
-                <div>
-                    <span>Email: </span>
-                    <span>{{data.email}}</span>
+                <div class="details">
+
+                    <div>
+                        <span>Birthday: </span>
+                        <span>{{data.birthday | date}}</span>
+                    </div>
+
+                    <div>
+                        <span>Gender: </span>
+                        <span>{{GenderType[data.gender]}}</span>
+                    </div>
+
+                    <mat-divider></mat-divider>
+
+                    <div>
+                        <span>Role: </span>
+                        <span>{{RoleType[data.role]}}</span>
+                    </div>
+
+                    <div>
+                        <span>Email: </span>
+                        <span>{{data.email}}</span>
+                    </div>
+
+                    <mat-divider></mat-divider>
+
+                    <div>
+                        <span>Phone number: </span>
+                        <span>{{data.phone}}</span>
+                    </div>
                 </div>
             </div>
         </div>

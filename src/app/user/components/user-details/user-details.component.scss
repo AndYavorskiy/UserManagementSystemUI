@@ -1,72 +1,41 @@
-.details {
-    margin: 0 30px;
-  
-    span:first-child {
-      font-weight: bold;
-    }
-  
-    & > div {
-      margin: 8px;
-      line-height: 1.5em;
-    }
+.logo-wrapper {
+  margin: 20px;
+
+  img {
+    max-height: 250px;
   }
-  
-  .details-container {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    flex-wrap: wrap;
+}
+
+.details-wrapper {
+  margin: 20px;
+
+  .title {
+    font-weight: bold;
+    font-size: 2em;
+    margin-bottom: 30px;
   }
-  
-  .description {
-    max-width: 500px;
-  }
-  
-  .ticket-icon {
-    font-size: 20px;
-    line-height: 24px;
-    vertical-align: middle;
-  }
-  
-  .mat-form-field {
-    width: 100%;
-  }
-  
-  .form-container {
-    margin: 0 auto;
-  }
-  
-  .info-field {
-    margin-bottom: 20px;
-    font-size: 1.1em;
-    border: 1px solid #e0e0e0;
-    padding: 15px;
-    border-radius: 5px;
-    background-color: #f5f5f5;
-  
-    span:first-child {
-      font-weight: bold;
-    }
-  }
-  
-  .mat-input-element:disabled {
-    color: black;
-  }
-  
-  .form-fields {
-    display: flex;
-    margin: 0 auto;
-    max-width: 900px;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    margin-top: 20px; 
-  }
-  
-  .form-column {
+
+  .details {
     max-width: 400px;
+
+    span:first-child {
+      font-weight: bold;
+    }
+
+    &>div {
+      margin: 12px 0;
+      line-height: 1.5em;
+      font-size: 1.2em;
+    }
   }
-  
-  .task-form {
-    max-width: 900px;
-    margin: 0 auto;
-  }
+}
+
+
+.details-container {
+  display: flex;
+  margin: 0 auto;
+  max-width: 900px;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-top: 20px;
+}

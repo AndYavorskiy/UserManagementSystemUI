@@ -1,1 +1,41 @@
-<p>add-members-popup works!</p>
+<div class="flex-space-between">
+    <span mat-dialog-title>Add members</span>
+    <button [mat-dialog-close]="changesApplied" mat-icon-button>
+        <mat-icon>clear</mat-icon>
+    </button>
+</div>
+<mat-dialog-content>
+    <div>
+        <mat-form-field class="search-field" appearance="outline">
+            <mat-icon matPrefix>search</mat-icon>
+            <input matInput cdkFocusInitial (keyup)="searchCandidates()" [(ngModel)]="filterText"
+                placeholder="Ex. Tony Stark">
+        </mat-form-field>
+    </div>
+
+    <mat-list *ngIf="isfilterTextValid && data.length">
+        <div mat-subheader>Users</div>
+        <mat-list-item *ngFor="let user of data">
+            <img matListAvatar src="../../../../assets/images/avatar-boy.png">
+            <div mat-line>{{user.firstName}} {{user.lastName}}</div>
+            <div mat-line> {{user.email}} </div>
+
+            <button *ngIf="!user.insideGroup" mat-icon-button (click)="addToGroup(user)">
+                <mat-icon>add</mat-icon>
+            </button>
+            <button *ngIf="user.insideGroup" mat-icon-button (click)="deleteFromGroup(user)">
+                <mat-icon>clear</mat-icon>
+            </button>
+
+        </mat-list-item>
+    </mat-list>
+
+    <div class="search-candidate">
+        <img *ngIf="!isfilterTextValid" src="../../../../assets/images/search-people.png">
+
+        <div *ngIf="isfilterTextValid && !data.length" class="no-data-found">
+            No data found
+        </div>
+    </div>
+
+</mat-dialog-content>

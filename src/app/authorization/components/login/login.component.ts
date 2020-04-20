@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/user/services';
 import { AuthorizationService } from 'src/app/shared/services';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AppContextService } from 'src/app/shared/services/app-context.service';
+import { AppContextService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-login',
@@ -37,8 +37,8 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      login: ['admin@gmail.com', Validators.required],
-      password: ['admin', Validators.required]
+      login: ['user@gmail.com', Validators.required],
+      password: ['123456789', Validators.required]
     });
 
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
