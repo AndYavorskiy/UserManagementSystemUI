@@ -41,6 +41,13 @@
                     <mat-divider></mat-divider>
 
                     <div>
+                        <span>Phone number: </span>
+                        <span>{{data.phone}}</span>
+                    </div>
+
+                    <mat-divider></mat-divider>
+
+                    <div>
                         <span>Role: </span>
                         <span>{{RoleType[data.role]}}</span>
                     </div>
@@ -50,11 +57,9 @@
                         <span>{{data.email}}</span>
                     </div>
 
-                    <mat-divider></mat-divider>
-
                     <div>
-                        <span>Phone number: </span>
-                        <span>{{data.phone}}</span>
+                        <span>Active status: </span>
+                        <span>{{data.isActive  | entityStatus}}</span>
                     </div>
                 </div>
             </div>

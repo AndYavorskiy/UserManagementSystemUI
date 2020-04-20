@@ -25,6 +25,13 @@ export class AuthGuard implements CanActivate {
             return this.router.parseUrl('/auth/change-password');
         }
 
-        return !!this.authService.getAuthToken() || this.router.parseUrl('/auth');
+        if (next.data.roles && next.data.roles.indexOf(user.role) === -1) {
+            // role not authorised so redirect to dashboard page
+            this.router.navigate(['/']);
+            return false;
+        }
+
+        // not logged in so redirect to login page with the return url
+        return !!this.authService.getAuthToken() || this.router.navigate(['/auth'], { queryParams: { returnUrl: state.url } });
     }
 }

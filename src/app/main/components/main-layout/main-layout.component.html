@@ -1,13 +1,26 @@
 <div>
     <mat-toolbar class="mat-elevation-z6 toollbar" color="primary">
-        <mat-toolbar-row>
+        <mat-toolbar-row *ngIf="(appContextService.currentUserInfo | async) as user">
             <img src="../../../../assets/images/logo-white.svg" routerLink="" alt="User management logo">
 
             <span class="flex-spacer"></span>
 
+            <span>{{user.firstName}}</span>
             <button mat-icon-button [matMenuTriggerFor]="menu">
                 <mat-icon class="tools-icon">account_circle</mat-icon>
             </button>
+
+            <mat-menu #menu="matMenu">
+                <a mat-menu-item  [routerLink]="[ '/users', user.id ]">
+                    <mat-icon>account_circle</mat-icon>
+                    <span>My Profile</span>
+                </a>
+                <button mat-menu-item (click)="logout()">
+                    <mat-icon>lock</mat-icon>
+                    <span>Log out</span>
+                </button>
+            </mat-menu>
+
         </mat-toolbar-row>
     </mat-toolbar>
 
@@ -15,14 +28,3 @@
         <router-outlet></router-outlet>
     </div>
 </div>
-
-<mat-menu #menu="matMenu">
-    <button mat-menu-item>
-        <mat-icon>account_circle</mat-icon>
-        <span>My Profile</span>
-    </button>
-    <button mat-menu-item (click)="logout()">
-        <mat-icon>lock</mat-icon>
-        <span>Log out</span>
-    </button>
-</mat-menu>

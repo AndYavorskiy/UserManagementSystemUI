@@ -19,9 +19,15 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { EntityStatusPipe } from './pipes';
+import { IfRoleDirective } from './directives';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    EntityStatusPipe,
+    IfRoleDirective
+  ],
   imports: [
     CommonModule,
   ],
@@ -45,7 +51,10 @@ import { MatListModule } from '@angular/material/list';
     MatSelectModule,
     MatDatepickerModule,
     MatDialogModule,
-    MatListModule
+    MatListModule,
+    MatCheckboxModule,
+    EntityStatusPipe,
+    IfRoleDirective
   ]
 })
 export class SharedModule { }

@@ -3,9 +3,10 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { RoleType, GenderType } from 'src/app/shared/models';
+import { RoleType, GenderType, UserModel } from 'src/app/shared/models';
 import { UserCreateModel, UserDetailsModel } from '../../models';
 import { UserService } from '../../services';
+import { AppContextService } from 'src/app/shared/services';
 
 @Component({
   selector: 'app-user-create-edit',
@@ -14,7 +15,10 @@ import { UserService } from '../../services';
 })
 export class UserCreateEditComponent implements OnInit {
 
+  loggedUser: UserModel;
+
   data: UserDetailsModel;
+  get isCreateMode() { return !this.data; }
   isLoading = false;
   maxDate = new Date();
 
@@ -22,11 +26,7 @@ export class UserCreateEditComponent implements OnInit {
   RoleType = RoleType;
   GenderType = GenderType;
 
-  roles = [
-    RoleType.Admin,
-    RoleType.Moderator,
-    RoleType.User
-  ];
+  roles: RoleType[] = [];
 
   genders = [
     GenderType.Male,
@@ -35,6 +35,7 @@ export class UserCreateEditComponent implements OnInit {
   ];
 
   constructor(private userService: UserService,
+    private appContextService: AppContextService,
     private router: Router,
     private location: Location,
     private fb: FormBuilder,
@@ -42,16 +43,36 @@ export class UserCreateEditComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.loggedUser = this.appContextService.getUserInfo();
+
+    switch (this.loggedUser.role) {
+      case RoleType.Admin:
+        this.roles = [
+          RoleType.Admin,
+          RoleType.Moderator,
+          RoleType.User
+        ];
+        break;
+
+      case RoleType.Moderator:
+        this.roles = [
+          RoleType.User
+        ];
+        break;
+      default: break;
+    }
+
     this.form = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
+      gender: ['', Validators.required],
       email: ['', Validators.required],
+      role: ['', Validators.required],
+      phone: [''],
+      birthday: [null],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
-      role: ['', Validators.required],
-      gender: ['', Validators.required],
-      phone: [''],
-      birthday: [null]
+      isActive: [false],
     });
 
     this.activatedRoute.paramMap.subscribe(params => {
@@ -67,13 +88,14 @@ export class UserCreateEditComponent implements OnInit {
             this.form.setValue({
               firstName: data.firstName,
               lastName: data.lastName,
+              gender: data.gender,
               email: data.email,
               role: data.role,
               phone: data.phone,
               birthday: data.birthday,
-              gender: data.gender,
               password: null,
-              confirmPassword: null
+              confirmPassword: null,
+              isActive: data.isActive
             });
 
             this.form.controls.password.clearValidators();
@@ -111,6 +133,8 @@ export class UserCreateEditComponent implements OnInit {
       this.userService.create(model)
         .subscribe(result => this.router.navigate(["/users", result.id], { replaceUrl: true }));
     } else {
+      model.isActive = formData.isActive;
+
       this.userService.update(model)
         .subscribe(() => this.goBack());
     }

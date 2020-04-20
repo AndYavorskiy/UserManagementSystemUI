@@ -5,16 +5,18 @@
             Back
         </button>
 
-        <a mat-raised-button color="primary" [routerLink]="[ '../edit', data.id ]">Edit</a>
+        <a mat-raised-button color="primary" [routerLink]="[ '../edit', data.id ]" *ifRole="[RoleType.Admin]">Edit</a>
 
-        <button mat-raised-button (click)=" delete()" [disabled]="!!data.membersCount">Delete</button>
+        <button mat-raised-button (click)=" delete()" [disabled]="!isListLoading && !!totalCount"
+            *ifRole="[RoleType.Admin]">Delete</button>
     </div>
 
     <div class="title">
-        {{data.name}}
+        <span class="name"> {{data.name}} </span>
+        <span *ngIf="!data.isActive" class="status"> (Inactive)</span>
     </div>
 
-    <div *ngIf="!data.membersCount" class="no-members-alert">
+    <div *ngIf="!totalCount" class="no-members-alert">
         <img src="../../../../assets/images/choose-group-members.svg" alt="">
         <div class="text">
             No members in the group yet!
@@ -26,7 +28,7 @@
         </button>
     </div>
 
-    <div *ngIf="!!data.membersCount">
+    <div *ngIf="!!totalCount">
         <button mat-raised-button color="primary" class="m-b-10" (click)="addMembers()">
             Add members
         </button>

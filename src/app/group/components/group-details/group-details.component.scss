@@ -1,8 +1,16 @@
 .title {
   text-align: center;
-  font-weight: bold;
-  font-size: 2em;
   margin: 20px 0;
+
+  .name {
+    font-weight: bold;
+    font-size: 2em;
+  }
+
+  .status {
+    color: #9E9E9E;
+    font-size: 1.2em;
+  }
 }
 
 .no-members-alert {
@@ -35,7 +43,7 @@ table {
     width: 25%;
 
     &.mat-column-logo {
-     width: 100px;
+      width: 100px;
     }
 
     &.mat-column-actions {

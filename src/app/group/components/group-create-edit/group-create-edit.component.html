@@ -12,10 +12,10 @@
                 <input formControlName="name" matInput type="text">
             </mat-form-field>
 
-            <mat-form-field appearance="outline" *ngIf="!isCreteMode">
-                <mat-label>Active status</mat-label>
-                <input formControlName="isActive" matInput type="text">
-            </mat-form-field>
+            <div *ngIf="!isCreteMode" class="active-status">
+                <mat-slide-toggle [labelPosition]="'before'" [color]="'primary'" formControlName="isActive">Active
+                    status</mat-slide-toggle>
+            </div>
         </div>
     </form>
 </div>

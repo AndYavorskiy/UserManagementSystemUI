@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthorizationService } from 'src/app/shared/services';
+import { AuthorizationService, AppContextService } from 'src/app/shared/services';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class MainLayoutComponent implements OnInit {
 
   constructor(
+    public appContextService: AppContextService,
     private authorizationService: AuthorizationService,
     private router: Router) { }
 

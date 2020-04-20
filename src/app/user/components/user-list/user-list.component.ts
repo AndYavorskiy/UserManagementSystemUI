@@ -22,7 +22,7 @@ export class UserListComponent implements OnInit {
 
   dataSource = new MatTableDataSource<UserDetailsModel>();
 
-  displayedColumns: string[] = ['logo', 'firstName', 'lastName', 'email', 'role'];
+  displayedColumns: string[] = ['logo', 'firstName', 'lastName', 'email', 'role', 'status'];
   totalCount = 0;
   pageSizeOptions = [10, 25, 50, 100];
   pageSize = this.pageSizeOptions[0];

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModelProperties, FilterModel } from 'src/app/shared/models';
+import { ModelProperties, FilterModel, RoleType } from 'src/app/shared/models';
 import { GroupDetailsModel } from '../../models';
 import { MatTableDataSource } from '@angular/material/table';
 import { GroupService } from '../../services';
@@ -17,10 +17,11 @@ export class GroupListComponent implements OnInit {
   filters = ModelProperties.propertiesOf<FilterModel>();
   isLoading = false;
   isLoadingError = false;
+  RoleType = RoleType;
 
   dataSource = new MatTableDataSource<GroupDetailsModel>();
 
-  displayedColumns: string[] = ['name', 'membersCount'];
+  displayedColumns: string[] = ['name', 'membersCount', 'status'];
   totalCount = 0;
   pageSizeOptions = [10, 25, 50];
   pageSize = this.pageSizeOptions[0];

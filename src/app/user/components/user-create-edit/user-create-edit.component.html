@@ -46,7 +46,7 @@
         <div class="form-column">
             <h1>Account</h1>
 
-            <mat-form-field appearance="outline">
+            <mat-form-field appearance="outline" *ifRole="[RoleType.Admin]">
                 <mat-label>Role</mat-label>
                 <mat-select formControlName="role">
                     <mat-option *ngFor="let role of roles" [value]="role">
@@ -69,6 +69,11 @@
                 <mat-label>Confirm password</mat-label>
                 <input formControlName="confirmPassword" matInput type="password">
             </mat-form-field>
+
+            <div *ngIf="!!data && loggedUser.role != RoleType.User" class="active-status">
+                <mat-slide-toggle [labelPosition]="'before'" [color]="'primary'" formControlName="isActive">Active
+                    status</mat-slide-toggle>
+            </div>
         </div>
     </form>
 </div>

@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, ActivatedRoute } from '@angular/router';
-
-import { GroupDetailsModel, GroupMemberModel } from '../../models';
-import { GroupService } from '../../services';
 import { MatTableDataSource } from '@angular/material/table';
 import { PageEvent } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
+
+import { GroupService } from '../../services';
+import { GroupDetailsModel, GroupMemberModel } from '../../models';
 import { AddMembersPopupComponent } from '../add-members-popup/add-members-popup.component';
+import { RoleType } from 'src/app/shared/models';
 
 @Component({
   selector: 'app-group-details',
@@ -18,6 +19,7 @@ export class GroupDetailsComponent implements OnInit {
 
   groupId: string;
   data: GroupDetailsModel;
+  RoleType = RoleType;
   isLoading = true;
 
   isListLoading = false;
@@ -77,7 +79,7 @@ export class GroupDetailsComponent implements OnInit {
 
     this.groupService.getGroupMembers(this.groupId, { pageIndex: this.pageIndex, pageSize: this.pageSize })
       .subscribe(data => {
-        this.isListLoading = true;
+        this.isListLoading = false;
         this.dataSource.data = data.items;
         this.totalCount = data.totalCount;
       })
