@@ -1,5 +1,4 @@
-export interface DataPagedModel<T>
-{
+export interface DataPagedModel<T> {
     items: T[];
     totalCount: number;
 }

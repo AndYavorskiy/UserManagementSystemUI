@@ -54,7 +54,7 @@ export class GroupDetailsComponent implements OnInit {
 
         this.loadMembers();
       }
-    })
+    });
   }
 
   delete() {
@@ -64,7 +64,7 @@ export class GroupDetailsComponent implements OnInit {
 
   deleteMember(item: GroupMemberModel) {
     this.groupService.deleteMemberFromGroup(this.groupId, item.id)
-      .subscribe(() => { this.loadMembers() })
+      .subscribe(() => { this.loadMembers(); });
   }
 
   onPaginatorChanges(event: PageEvent) {
@@ -82,7 +82,7 @@ export class GroupDetailsComponent implements OnInit {
         this.isListLoading = false;
         this.dataSource.data = data.items;
         this.totalCount = data.totalCount;
-      })
+      });
   }
 
   addMembers(): void {

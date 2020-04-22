@@ -19,7 +19,7 @@ import {
     GroupMembersListComponent,
     AddMembersPopupComponent
   ],
-  entryComponents:[
+  entryComponents: [
     AddMembersPopupComponent
   ],
   imports: [

@@ -4,8 +4,8 @@ export class HttpParamsBuilder {
     private parameters: HttpParams;
 
     constructor(object?: any) {
-        this.parameters = object 
-            ? new HttpParams({ fromObject: object }) 
+        this.parameters = object
+            ? new HttpParams({ fromObject: object })
             : new HttpParams();
     }
 

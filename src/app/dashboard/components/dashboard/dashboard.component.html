@@ -1,26 +1,14 @@
 <div *ngIf="(appContextService.currentUser | async) as user">
     <div class="cards-container">
         <div class="card-wrapper" *ifRole="[RoleType.Admin, RoleType.Moderator]">
-            <mat-card [routerLink]="[ '/groups' ]" matRipple>
-                <div class="card-content groups-card">
+            <mat-card [routerLink]="[ '/groups' ]" matRipple class="groups">
                     <span class="title">Groups</span>
-
-                    <div>
-                        <mat-icon>group</mat-icon>
-                    </div>
-                </div>
             </mat-card>
         </div>
 
         <div class="card-wrapper" *ifRole="[RoleType.Admin, RoleType.Moderator]">
-            <mat-card [routerLink]="[ '/users' ]" matRipple>
-                <div class="card-content users-card">
+            <mat-card [routerLink]="[ '/users' ]" matRipple class="users">
                     <span class="title">Users</span>
-
-                    <div>
-                        <mat-icon>person</mat-icon>
-                    </div>
-                </div>
             </mat-card>
         </div>
 

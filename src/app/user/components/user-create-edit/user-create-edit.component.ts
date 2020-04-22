@@ -104,7 +104,7 @@ export class UserCreateEditComponent implements OnInit {
             this.isLoading = false;
           });
       }
-    })
+    });
   }
 
   submit() {

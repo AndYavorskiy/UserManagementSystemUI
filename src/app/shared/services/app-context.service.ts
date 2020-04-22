@@ -11,7 +11,7 @@ import { AppSettingKeys } from '../constants';
 export class AppContextService {
 
     private userModelSubject: BehaviorSubject<UserModel>;
-    public currentUser: Observable<UserModel>;
+    currentUser: Observable<UserModel>;
 
     constructor() {
         const user = AppContextService.getCurrentUser();
@@ -20,15 +20,16 @@ export class AppContextService {
         this.currentUser = this.userModelSubject.asObservable();
     }
 
-    public updateUserInfo(userModel: UserModel) {
-        localStorage.setItem(AppSettingKeys.UserInfo, JSON.stringify(userModel));
 
-        this.userModelSubject.next(userModel);
-    }
-
-    public static getCurrentUser(): UserModel {
+    static getCurrentUser(): UserModel {
         return !!localStorage.getItem(AppSettingKeys.UserInfo)
             ? JSON.parse(localStorage.getItem(AppSettingKeys.UserInfo))
             : null;
+    }
+
+    updateUserInfo(userModel: UserModel) {
+        localStorage.setItem(AppSettingKeys.UserInfo, JSON.stringify(userModel));
+
+        this.userModelSubject.next(userModel);
     }
 }

@@ -43,11 +43,11 @@ export class UserDetailsComponent implements OnInit {
           .subscribe(data => {
             const currentUser = AppContextService.getCurrentUser();
 
-            this.isEditVisible = currentUser.role == RoleType.Admin
-              || currentUser.role == RoleType.Moderator && data.role == RoleType.User
-              || currentUser.id == data.id;
+            this.isEditVisible = currentUser.role === RoleType.Admin
+              || currentUser.role === RoleType.Moderator && data.role === RoleType.User
+              || currentUser.id === data.id;
 
-            this.canNavigateToGroup = currentUser.role != RoleType.User;
+            this.canNavigateToGroup = currentUser.role !== RoleType.User;
 
             this.data = data;
             this.isLoading = false;
@@ -56,7 +56,7 @@ export class UserDetailsComponent implements OnInit {
         this.userService.getUserGroups(id)
           .subscribe(groups => this.groups = groups);
       }
-    })
+    });
   }
 
   getImageThumbNail() {
@@ -64,7 +64,7 @@ export class UserDetailsComponent implements OnInit {
       case GenderType.Male:
         return 'assets/images/avatar-boy.png';
       case GenderType.Femail:
-        return 'ssets/images/avatar-girl.png';
+        return 'assets/images/avatar-girl.png';
       case GenderType.Other:
         return 'assets/images/avatar-other.png';
     }

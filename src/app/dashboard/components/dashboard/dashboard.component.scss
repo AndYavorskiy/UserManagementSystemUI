@@ -3,44 +3,49 @@
     flex-wrap: wrap;
 
     .card-wrapper {
-        width: 20%;
+        @media only screen and (max-width: 600px) {
+            width: 100%;
+        }
+
+        @media only screen and (min-width: 600px) {
+            width: 50%;
+        }
+
+        @media only screen and (min-width: 768px) {
+            width: 33.33%;
+        }
+
+        @media only screen and (min-width: 992px) {
+            width: 25%;
+        }
+
+        @media only screen and (min-width: 1200px) {
+            width: 20%;
+        }
 
         .mat-card {
             margin: 10px;
             cursor: pointer;
+            height: 120px;
+            display: flex;
+            align-items: center;
 
-            .card-content {
-                height: 100px;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
+            background-size: 130px;
+            background-repeat: no-repeat;
+            background-position: bottom -25px right -15px;
 
-                .title {
-                    font-size: 2.3em;
-                }
+            &.users {
+                background-color: #c8e6c938;
+                background-image: url("../../../../assets/images/users.svg");
+            }
 
-                .mat-icon {
-                    font-size: 3em;
-                    display: inline;
-                    margin: 10px;
+            &.groups {
+                background-color: #bbdefb38;
+                background-image: url("../../../../assets/images/group.svg");
+            }
 
-                    padding: 13px;
-                    border-radius: 100%;
-                }
-
-                &.groups-card {
-                    .mat-icon {
-                        color: #2196F3;
-                        background-color: #BBDEFB;
-                    }
-                }
-
-                &.users-card {
-                    .mat-icon {
-                        color: #009688;
-                        background-color: #C8E6C9;
-                    }
-                }
+            .title {
+                font-size: 2.3em;
             }
         }
     }

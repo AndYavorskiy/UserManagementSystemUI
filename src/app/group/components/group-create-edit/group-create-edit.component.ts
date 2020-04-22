@@ -52,8 +52,8 @@ export class GroupCreateEditComponent implements OnInit {
 
             this.isLoading = false;
           });
-      };
-    })
+      }
+    });
   }
 
   submit() {

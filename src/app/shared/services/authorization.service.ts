@@ -22,8 +22,8 @@ export class AuthorizationService {
 
   refresh(token: string, refreshToken: string) {
     return this.http.post<AuthTokenModel>(`${this.baseUrl}/refresh`, {
-      token: token,
-      refreshToken: refreshToken
+      token,
+      refreshToken
     });
   }
 

@@ -1,6 +1,6 @@
 import { Subscription } from 'rxjs';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -14,7 +14,7 @@ import { MustMatch } from 'src/app/shared/utilities';
   templateUrl: './change-password.component.html',
   styleUrls: ['./change-password.component.scss']
 })
-export class ChangePasswordComponent implements OnInit {
+export class ChangePasswordComponent implements OnInit, OnDestroy {
 
   returnUrl: string;
 
@@ -51,7 +51,7 @@ export class ChangePasswordComponent implements OnInit {
     }
 
     const data = this.form.getRawValue();
-    let user = AppContextService.getCurrentUser();
+    const user = AppContextService.getCurrentUser();
 
     this.isLoading = true;
 

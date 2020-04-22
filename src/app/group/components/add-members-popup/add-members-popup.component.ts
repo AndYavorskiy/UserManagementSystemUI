@@ -38,7 +38,7 @@ export class AddMembersPopupComponent {
       .subscribe(data => {
         this.data = data;
         this.isLoading = false;
-      })
+      });
   }
 
   addToGroup(user: GroupCandidate) {

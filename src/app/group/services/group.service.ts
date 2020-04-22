@@ -52,7 +52,7 @@ export class GroupService {
   }
 
   addMemberToGroup(groupId: string, userId: string) {
-    return this.http.post<void>(`${this.baseUrl}/${groupId}/members`, { userId: userId });
+    return this.http.post<void>(`${this.baseUrl}/${groupId}/members`, { userId });
   }
 
   deleteMemberFromGroup(groupId: string, userId: string) {
