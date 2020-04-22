@@ -3,7 +3,7 @@ import { Observable, throwError } from 'rxjs';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { AuthorizationService } from "../services"
+import { AuthorizationService } from '../services'
 import { catchError, switchMap, map } from 'rxjs/operators';
 import { AuthTokenModel } from '../models';
 import { Router } from '@angular/router';
@@ -31,7 +31,7 @@ export class JwtInterceptor implements HttpInterceptor {
             }
 
             if (error.status === 403) {
-                this.router.navigate(["/"]);
+                this.router.navigate(['/']);
                 location.reload(true);
             }
 

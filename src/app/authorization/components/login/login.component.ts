@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
   showErrorMessage: boolean;
   isLoading = false;
 
+  get f() { return this.form.controls; }
   private subscription = new Subscription();
 
   constructor(
@@ -30,15 +31,15 @@ export class LoginComponent implements OnInit {
     private router: Router) {
 
     // redirect to home if already logged in
-    if (this.appContextService.currentUserInfo) {
+    if (this.appContextService.currentUser) {
       this.router.navigate(['/']);
     }
   }
 
   ngOnInit() {
     this.form = this.fb.group({
-      login: ['user@gmail.com', Validators.required],
-      password: ['123456789', Validators.required]
+      login: ['', Validators.required],
+      password: ['', Validators.required]
     });
 
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';

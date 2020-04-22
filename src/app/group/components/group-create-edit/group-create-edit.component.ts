@@ -21,7 +21,8 @@ export class GroupCreateEditComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private groupService: GroupService,
+  constructor(
+    private groupService: GroupService,
     private router: Router,
     private location: Location,
     private fb: FormBuilder,
@@ -35,7 +36,7 @@ export class GroupCreateEditComponent implements OnInit {
     });
 
     this.activatedRoute.paramMap.subscribe(params => {
-      const id = params.get("id");
+      const id = params.get('id');
 
       if (id) {
         this.isLoading = true;
@@ -51,7 +52,7 @@ export class GroupCreateEditComponent implements OnInit {
 
             this.isLoading = false;
           });
-      }
+      };
     })
   }
 
@@ -72,7 +73,7 @@ export class GroupCreateEditComponent implements OnInit {
 
     if (this.isCreteMode) {
       this.groupService.create(model)
-        .subscribe(result => this.router.navigate(["/groups", result.id], { replaceUrl: true }));
+        .subscribe(result => this.router.navigate(['/groups', result.id], { replaceUrl: true }));
     } else {
       this.groupService.update(model)
         .subscribe(() => this.goBack());

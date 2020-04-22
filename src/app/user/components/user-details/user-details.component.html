@@ -1,19 +1,17 @@
-<div class="page-container" *ngIf="data">
+<div *ngIf="data">
     <div class="button-group">
         <button mat-button (click)="location.back()">
             <mat-icon>chevron_left</mat-icon>
             Back
         </button>
 
-        <a mat-raised-button color="primary" [routerLink]="[ '../edit', data.id ]">Edit</a>
-
-        <button mat-raised-button (click)=" delete()">Delete</button>
+        <a *ngIf="isEditVisible" mat-raised-button color="primary" [routerLink]="[ '../edit', data.id ]">Edit</a>
     </div>
 
-    <div>
+    <div class="page-container">
         <div class="details-container">
             <div class="logo-wrapper">
-                <img src="../../../../assets/images/avatar-boy.png" alt="">
+                <img [src]="data.profileImageUrl || getImageThumbNail()" alt="">
 
                 <div class="button-group">
 
@@ -38,14 +36,10 @@
                         <span>{{GenderType[data.gender]}}</span>
                     </div>
 
-                    <mat-divider></mat-divider>
-
                     <div>
                         <span>Phone number: </span>
                         <span>{{data.phone}}</span>
                     </div>
-
-                    <mat-divider></mat-divider>
 
                     <div>
                         <span>Role: </span>
@@ -64,5 +58,16 @@
                 </div>
             </div>
         </div>
+
+        <mat-list *ngIf="groups.length">
+            <div mat-subheader>Groups</div>
+
+            <mat-list-item *ngFor="let group of groups" [ngClass]="{'can-navigate': canNavigateToGroup}"
+                [routerLink]="canNavigateToGroup ? ['/groups', group.id ] : []">
+                <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
+
+                <div mat-line>{{group.name}} </div>
+            </mat-list-item>
+        </mat-list>
     </div>
 </div>

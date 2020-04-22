@@ -1,1 +1,1 @@
-export { AppSettingKeys } from "./app-setting-keys.constant";
+export { AppSettingKeys } from './app-setting-keys.constant';

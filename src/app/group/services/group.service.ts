@@ -39,8 +39,8 @@ export class GroupService {
 
   searchCandidates(groupId: string, takeFirst: number, filter: string) {
     const builder = new HttpParamsBuilder()
-      .append("takeFirst", takeFirst)
-      .append("filter", filter);
+      .append('takeFirst', takeFirst)
+      .append('filter', filter);
 
     return this.http.get<GroupCandidate[]>(`${this.baseUrl}/${groupId}/candidates`, { params: builder.params });
   }

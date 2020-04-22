@@ -46,7 +46,7 @@
         <div class="form-column">
             <h1>Account</h1>
 
-            <mat-form-field appearance="outline" *ifRole="[RoleType.Admin]">
+            <mat-form-field appearance="outline" *ifRole="[RoleType.Admin, RoleType.Moderator]">
                 <mat-label>Role</mat-label>
                 <mat-select formControlName="role">
                     <mat-option *ngFor="let role of roles" [value]="role">

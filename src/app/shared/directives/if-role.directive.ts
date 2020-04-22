@@ -11,15 +11,14 @@ export class IfRoleDirective {
 
   constructor(
     private templateRef: TemplateRef<any>,
-    private viewContainer: ViewContainerRef,
-    private authService: AppContextService) {
+    private viewContainer: ViewContainerRef) {
   }
 
   @Input()
   set ifRole(allowedRoles: RoleType[]) {
     this.allowedRoles = allowedRoles;
 
-    let user = this.authService.getUserInfo();
+    let user = AppContextService.getCurrentUser();
 
     if (!this.allowedRoles || this.allowedRoles.length === 0 || !user) {
       this.viewContainer.clear();

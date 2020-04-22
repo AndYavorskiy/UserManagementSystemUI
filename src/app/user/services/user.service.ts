@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { HttpParamsBuilder } from 'src/app/shared/utilities';
 import { FilterModel, DataPagedModel, ChangePasswordModel } from 'src/app/shared/models';
 import { UserDetailsModel, UserCreateModel } from '../models';
+import { GroupModel } from 'src/app/group/models';
 
 @Injectable({
   providedIn: 'root'
@@ -37,11 +38,11 @@ export class UserService {
     return this.http.put<UserDetailsModel>(this.baseUrl, model);
   }
 
-  delete(id: string) {
-    return this.http.delete<void>(`${this.baseUrl}/${id}`);
-  }
-
   changePassword(model: ChangePasswordModel) {
     return this.http.put<void>(`${this.baseUrl}/change-password`, model);
+  }
+
+  getUserGroups(id: string) {
+    return this.http.get<GroupModel[]>(`${this.baseUrl}/${id}/groups`);
   }
 }

@@ -27,10 +27,11 @@ export class UserListComponent implements OnInit {
   pageSizeOptions = [10, 25, 50, 100];
   pageSize = this.pageSizeOptions[0];
   pageIndex = 0;
-  filterText = "";
-  includeInactive = true;
+  filterText = '';
+  includeInactive = false;
 
-  constructor(private userService: UserService,
+  constructor(
+    private userService: UserService,
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute) { }
 
@@ -41,16 +42,22 @@ export class UserListComponent implements OnInit {
         this.filterText = param[this.filters('filterText')] || this.filterText;
         this.pageIndex = param[this.filters('pageIndex')] || this.pageIndex;
         this.pageSize = param[this.filters('pageSize')] || this.pageSize;
-        this.includeInactive = param[this.filters('includeInactive')] || this.includeInactive;
+        this.includeInactive = !!param[this.filters('includeInactive')];
 
         this.searchData();
       });
   }
 
-  applyFilter(event: Event) {
+  applyFilter() {
     this.pageIndex = 0;
 
     this.searchData();
+  }
+
+  toggleStatus($event) {
+    $event.stopPropagation();
+    this.includeInactive = !this.includeInactive;
+    this.applyFilter();
   }
 
   onPaginatorChanges(event: PageEvent) {

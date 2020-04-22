@@ -1,1 +1,1 @@
-export { EntityStatusPipe } from "./entity-status.pipe";
+export { EntityStatusPipe } from './entity-status.pipe';

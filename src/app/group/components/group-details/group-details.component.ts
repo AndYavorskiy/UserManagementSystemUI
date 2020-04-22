@@ -32,16 +32,16 @@ export class GroupDetailsComponent implements OnInit {
   pageSize = this.pageSizeOptions[0];
   pageIndex = 0;
 
-  constructor(private groupService: GroupService,
-    private dialog: MatDialog,
-    private router: Router,
+  constructor(
     public location: Location,
+    private groupService: GroupService,
+    private dialog: MatDialog,
     private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
-      this.groupId = params.get("id");
+      this.groupId = params.get('id');
 
       if (this.groupId) {
         this.isLoading = true;
@@ -59,7 +59,7 @@ export class GroupDetailsComponent implements OnInit {
 
   delete() {
     this.groupService.delete(this.data.id)
-      .subscribe(() => { this.location.back() })
+      .subscribe(() => this.location.back());
   }
 
   deleteMember(item: GroupMemberModel) {

@@ -34,8 +34,8 @@ export class UserCreateEditComponent implements OnInit {
     GenderType.Other
   ];
 
-  constructor(private userService: UserService,
-    private appContextService: AppContextService,
+  constructor(
+    private userService: UserService,
     private router: Router,
     private location: Location,
     private fb: FormBuilder,
@@ -43,7 +43,7 @@ export class UserCreateEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loggedUser = this.appContextService.getUserInfo();
+    this.loggedUser = AppContextService.getCurrentUser();
 
     switch (this.loggedUser.role) {
       case RoleType.Admin:
@@ -76,7 +76,7 @@ export class UserCreateEditComponent implements OnInit {
     });
 
     this.activatedRoute.paramMap.subscribe(params => {
-      const id = params.get("id");
+      const id = params.get('id');
 
       if (id) {
         this.isLoading = true;
@@ -131,7 +131,7 @@ export class UserCreateEditComponent implements OnInit {
       model.password = formData.password;
 
       this.userService.create(model)
-        .subscribe(result => this.router.navigate(["/users", result.id], { replaceUrl: true }));
+        .subscribe(result => this.router.navigate(['/users', result.id], { replaceUrl: true }));
     } else {
       model.isActive = formData.isActive;
 

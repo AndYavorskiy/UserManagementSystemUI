@@ -7,6 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/user/services';
 import { AuthorizationService } from 'src/app/shared/services';
 import { AppContextService } from 'src/app/shared/services';
+import { MustMatch } from 'src/app/shared/utilities';
 
 @Component({
   selector: 'app-change-password',
@@ -21,12 +22,12 @@ export class ChangePasswordComponent implements OnInit {
   showErrorMessage: boolean;
   isLoading = false;
 
+  get f() { return this.form.controls; }
   private subscription = new Subscription();
 
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private authService: AuthorizationService,
     private appContextService: AppContextService,
     private route: ActivatedRoute,
     private router: Router) {
@@ -37,6 +38,8 @@ export class ChangePasswordComponent implements OnInit {
       oldPassword: ['', Validators.required],
       newPassword: ['', Validators.required],
       repeatPassword: ['', Validators.required],
+    }, {
+      validator: MustMatch('newPassword', 'repeatPassword')
     });
 
     this.returnUrl = this.route.snapshot.queryParams.returnUrl || '/';
@@ -48,7 +51,7 @@ export class ChangePasswordComponent implements OnInit {
     }
 
     const data = this.form.getRawValue();
-    let user = this.appContextService.getUserInfo();
+    let user = AppContextService.getCurrentUser();
 
     this.isLoading = true;
 

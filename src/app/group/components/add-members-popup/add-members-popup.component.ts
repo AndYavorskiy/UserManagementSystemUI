@@ -14,7 +14,7 @@ export class AddMembersPopupComponent {
   isLoading = false;
   changesApplied = false;
   takeFirst = 25;
-  filterText = "";
+  filterText = '';
 
   get isfilterTextValid() { return this.filterText.trim().length > 1; }
 
@@ -46,7 +46,7 @@ export class AddMembersPopupComponent {
       .subscribe(() => {
         user.insideGroup = true;
         this.changesApplied = true;
-      })
+      });
   }
 
   deleteFromGroup(user: GroupCandidate) {
@@ -54,6 +54,6 @@ export class AddMembersPopupComponent {
       .subscribe(() => {
         user.insideGroup = false;
         this.changesApplied = true;
-      })
+      });
   }
 }

@@ -1,8 +1,8 @@
-import { BehaviorSubject, Observable } from "rxjs";
+import { BehaviorSubject, Observable } from 'rxjs';
 
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 
-import { UserModel } from "../models";
+import { UserModel } from '../models';
 import { AppSettingKeys } from '../constants';
 
 @Injectable({
@@ -11,13 +11,13 @@ import { AppSettingKeys } from '../constants';
 export class AppContextService {
 
     private userModelSubject: BehaviorSubject<UserModel>;
-    public currentUserInfo: Observable<UserModel>;
+    public currentUser: Observable<UserModel>;
 
     constructor() {
-        const user = this.getUserInfo();
+        const user = AppContextService.getCurrentUser();
 
         this.userModelSubject = new BehaviorSubject<UserModel>(user);
-        this.currentUserInfo = this.userModelSubject.asObservable();
+        this.currentUser = this.userModelSubject.asObservable();
     }
 
     public updateUserInfo(userModel: UserModel) {
@@ -26,7 +26,7 @@ export class AppContextService {
         this.userModelSubject.next(userModel);
     }
 
-    public getUserInfo(): UserModel {
+    public static getCurrentUser(): UserModel {
         return !!localStorage.getItem(AppSettingKeys.UserInfo)
             ? JSON.parse(localStorage.getItem(AppSettingKeys.UserInfo))
             : null;

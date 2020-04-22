@@ -1,21 +1,31 @@
 <h1> Users</h1>
 
-<a mat-raised-button color="primary" [routerLink]="[ 'create' ]">Add User</a>
-
 <div>
+    <a mat-raised-button color="primary" [routerLink]="[ 'create' ]">Add User</a>
+</div>
+<div class="tool-panel">
+
     <mat-form-field class="search-field" appearance="outline">
         <mat-icon matPrefix>search</mat-icon>
-        <mat-label>Search</mat-label>
-        <input matInput (keyup)="applyFilter($event)" [(ngModel)]="filterText" placeholder="Ex. Tony Stark">
+
+        <input matInput (keyup)="applyFilter()" [(ngModel)]="filterText" placeholder="Ex. Tony Stark">
+
+        <button mat-icon-button matSuffix [color]="includeInactive? 'primary': ''" (click)="toggleStatus($event)"
+            matTooltip="Include inactive" matTooltipPosition="above">
+            <mat-icon>{{includeInactive ? 'visibility' : 'visibility_off'}}</mat-icon>
+        </button>
     </mat-form-field>
 </div>
 
 <div class="container mat-elevation-z8">
 
-    <div class="loading-shade" *ngIf="isLoading || isLoadingError">
-        <mat-spinner *ngIf="isLoading"></mat-spinner>
-        <div class="loading-error" *ngIf="isLoadingError">
-            An error ocurred while loading the data.
+    <div class="loading-table-overlap shadowed" *ngIf="isLoading || isLoadingError || !totalCount">
+        <div class="message">
+            <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+            <span *ngIf="!isLoading && isLoadingError"> An error ocurred while loading the data</span>
+
+            <span *ngIf="!isLoading && !isLoadingError && !totalCount"> No items found</span>
         </div>
     </div>
 

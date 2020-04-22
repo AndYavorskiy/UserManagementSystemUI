@@ -6,6 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class EntityStatusPipe implements PipeTransform {
 
   transform(value: boolean) {
-    return value ? "Active" : "Inactive";
+    return value ? 'Active' : 'Inactive';
   }
 }

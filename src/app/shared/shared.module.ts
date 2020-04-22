@@ -20,6 +20,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatListModule } from '@angular/material/list';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatRippleModule } from '@angular/material/core';
+import { MatTooltipModule } from '@angular/material/tooltip'
 import { EntityStatusPipe } from './pipes';
 import { IfRoleDirective } from './directives';
 
@@ -53,6 +55,8 @@ import { IfRoleDirective } from './directives';
     MatDialogModule,
     MatListModule,
     MatCheckboxModule,
+    MatRippleModule,
+    MatTooltipModule,
     EntityStatusPipe,
     IfRoleDirective
   ]

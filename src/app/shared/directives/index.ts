@@ -1,1 +1,1 @@
-export { IfRoleDirective } from "./if-role.directive";
+export { IfRoleDirective } from './if-role.directive';

@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { UserService } from '../../services';
 import { UserDetailsModel } from '../../models';
 import { RoleType, GenderType } from 'src/app/shared/models';
+import { AppContextService } from 'src/app/shared/services';
+import { GroupModel } from 'src/app/group/models';
 
 @Component({
   selector: 'app-user-details',
@@ -13,36 +15,58 @@ import { RoleType, GenderType } from 'src/app/shared/models';
 })
 export class UserDetailsComponent implements OnInit {
 
-  data: UserDetailsModel;
   isLoading = true;
+  data: UserDetailsModel;
+
+  groups: GroupModel[] = [];
 
   RoleType = RoleType;
   GenderType = GenderType;
 
-  constructor(private userService: UserService,
-    private router: Router,
+  isEditVisible = false;
+  canNavigateToGroup = false;
+
+  constructor(
     public location: Location,
+    private userService: UserService,
     private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
     this.activatedRoute.paramMap.subscribe(params => {
-      const id = params.get("id");
+      const id = params.get('id');
 
       if (id) {
         this.isLoading = true;
 
         this.userService.get(id)
           .subscribe(data => {
+            const currentUser = AppContextService.getCurrentUser();
+
+            this.isEditVisible = currentUser.role == RoleType.Admin
+              || currentUser.role == RoleType.Moderator && data.role == RoleType.User
+              || currentUser.id == data.id;
+
+            this.canNavigateToGroup = currentUser.role != RoleType.User;
+
             this.data = data;
             this.isLoading = false;
           });
+
+        this.userService.getUserGroups(id)
+          .subscribe(groups => this.groups = groups);
       }
     })
   }
 
-  delete() {
-    this.userService.delete(this.data.id)
-      .subscribe(() => { this.location.back() })
+  getImageThumbNail() {
+    switch (this.data.gender) {
+      case GenderType.Male:
+        return 'assets/images/avatar-boy.png';
+      case GenderType.Femail:
+        return 'ssets/images/avatar-girl.png';
+      case GenderType.Other:
+        return 'assets/images/avatar-other.png';
+    }
   }
 }

@@ -12,14 +12,13 @@ export class AuthGuard implements CanActivate {
 
     constructor(
         private authService: AuthorizationService,
-        private appContextService: AppContextService,
         private router: Router) { }
 
     canActivate(
         next: ActivatedRouteSnapshot,
         state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-        const user = this.appContextService.getUserInfo();
+        const user = AppContextService.getCurrentUser();
 
         if (user && user.passwordChangeRequired) {
             return this.router.parseUrl('/auth/change-password');

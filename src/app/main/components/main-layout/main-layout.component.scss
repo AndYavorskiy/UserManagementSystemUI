@@ -8,7 +8,16 @@ img {
     margin: 0 10px;
 }
 
-.tools-icon{
-    font-size: 30px;
-    width: 30px;
+.logo-wrapper {
+    background-color: white;
+    color: #3f51b5;
+    padding: 5px;
+    border-radius: 100%;
+    width: 38px;
+    height: 38px;
+    font-size: 0.8em;
+    line-height: 1.9em;
+    margin: 0 10px;
+    text-align: center;
+    cursor: pointer;
 }

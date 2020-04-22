@@ -1,7 +1,7 @@
-<div *ngIf="(appContextService.currentUserInfo | async) as user">
+<div *ngIf="(appContextService.currentUser | async) as user">
     <div class="cards-container">
         <div class="card-wrapper" *ifRole="[RoleType.Admin, RoleType.Moderator]">
-            <mat-card [routerLink]="[ '/groups' ]">
+            <mat-card [routerLink]="[ '/groups' ]" matRipple>
                 <div class="card-content groups-card">
                     <span class="title">Groups</span>
 
@@ -13,7 +13,7 @@
         </div>
 
         <div class="card-wrapper" *ifRole="[RoleType.Admin, RoleType.Moderator]">
-            <mat-card [routerLink]="[ '/users' ]">
+            <mat-card [routerLink]="[ '/users' ]" matRipple>
                 <div class="card-content users-card">
                     <span class="title">Users</span>
 
@@ -23,5 +23,7 @@
                 </div>
             </mat-card>
         </div>
+
+        <h2 *ifRole="[RoleType.User]">You have no widgets yet!</h2>
     </div>
 </div>

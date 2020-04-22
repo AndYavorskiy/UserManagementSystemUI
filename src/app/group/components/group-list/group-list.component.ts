@@ -26,10 +26,11 @@ export class GroupListComponent implements OnInit {
   pageSizeOptions = [10, 25, 50];
   pageSize = this.pageSizeOptions[0];
   pageIndex = 0;
-  filterText = "";
-  includeInactive = true;
+  filterText = '';
+  includeInactive = false;
 
-  constructor(private groupService: GroupService,
+  constructor(
+    private groupService: GroupService,
     private readonly router: Router,
     private readonly activatedRoute: ActivatedRoute) { }
 
@@ -46,10 +47,16 @@ export class GroupListComponent implements OnInit {
       });
   }
 
-  applyFilter(event: Event) {
+  applyFilter() {
     this.pageIndex = 0;
 
     this.searchData();
+  }
+
+  toggleStatus($event) {
+    $event.stopPropagation();
+    this.includeInactive = !this.includeInactive;
+    this.applyFilter();
   }
 
   onPaginatorChanges(event: PageEvent) {

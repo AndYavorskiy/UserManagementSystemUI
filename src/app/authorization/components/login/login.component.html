@@ -1,21 +1,26 @@
-<div class="login-form">
-    <div class="title text-center">
-        Login
-    </div>
+<div class="auth-form  mat-elevation-z8">
+    <div class="title"> Login </div>
 
-    <form [formGroup]="form" (submit)="login()">
+    <form [formGroup]="form" (submit)="login()" *ngIf="form">
         <div class="form-fields">
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Login</mat-label>
                 <input formControlName="login" matInput>
+                <mat-error *ngIf="f.login.errors as err">
+                    <span *ngIf="err.required"> Please enter your email </span>
+                </mat-error>
             </mat-form-field>
 
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Password</mat-label>
                 <input formControlName="password" matInput type='password'>
+                <mat-error *ngIf="f.password.errors as err">
+                    <span *ngIf="err.required"> Please enter your password </span>
+                </mat-error>
             </mat-form-field>
 
-            <button mat-raised-button color="primary" type="submit" [disabled]="!form.valid">Login</button>
+            <button mat-raised-button class="m-t-15" color="primary" type="submit"
+                [disabled]="form.invalid">Login</button>
 
             <div class="error-message" *ngIf="showErrorMessage">
                 Incorrect login or password.
